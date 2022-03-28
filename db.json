@@ -1,0 +1,16 @@
+{
+  "Article": [
+    {
+      "id": 1,
+      "title": "test 1",
+      "body": "this is test",
+      "author": "mahdi nemati"
+    },
+    {
+      "id": 2,
+      "title": "test 2",
+      "body": "this is test for mahsan",
+      "author": "mahdi nemati"
+    }
+  ]
+}

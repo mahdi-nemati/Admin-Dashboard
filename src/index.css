@@ -1,0 +1,27 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+body {
+  height: 100vh;
+  background-color: #eae3f1;
+}
+#loginForm{
+  height: 500px;
+  width: 400px;
+}
+#nav{
+  background-color: #f3f3fa;
+}
+#chartCon{
+  width: 500px;
+  height: 300px;
+}
+#lineChart{
+  width: 900px;
+  height: 300px;
+}
+#chartCircle{
+  width: 400px;
+  height: 300px;
+  
+}
