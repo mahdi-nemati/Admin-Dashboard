@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 import { getAsyncArticle } from "../../Feature/FileSlice";
 import Loading from "./Loading";
 export default function ArticleList() {
@@ -23,10 +24,12 @@ export default function ArticleList() {
         {Article ? (
           Article.map((a) => {
             return (
-              <div className="flex justify-between w-5/12 pl-5 pt-2 pb-2 mb-2 mt-1 hover:bg-gray-300 cursor-pointer">
-                <p>{a.title}</p>
-                <p>{a.author}</p>
-              </div>
+              <Link to={`/article/${a.id}`} key={a.id}>
+                <div className="flex justify-between w-5/12 pl-5 pt-2 pb-2 mb-2 mt-1 hover:bg-gray-300 cursor-pointer">
+                  <p>{a.title}</p>
+                  <p>{a.author}</p>
+                </div>
+              </Link>
             );
           })
         ) : (

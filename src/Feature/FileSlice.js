@@ -1,11 +1,25 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
-// get data
+// get all Article
 export const getAsyncArticle = createAsyncThunk(
   "Article/getAsyncArticle",
   async (_, { rejectWithValue }) => {
     try {
       const { data } = await axios.get("http://localhost:3001/Article");
+      return data;
+    } catch (error) {
+      return rejectWithValue([], error.message);
+    }
+  }
+);
+// get one Article
+export const getOneAsyncArticle = createAsyncThunk(
+  "Article/getOneAsyncArticle",
+  async (payload, { rejectWithValue }) => {
+    try {
+      const { data } = await axios.get(
+        `http://localhost:3001/article/${payload}`
+      );
       return data;
     } catch (error) {
       return rejectWithValue([], error.message);
@@ -48,6 +62,7 @@ const ArticleSlice = createSlice({
   name: "Article",
   initialState,
   extraReducers: {
+    // get all article actions
     [getAsyncArticle.fulfilled]: (state, action) => {
       return { ...state, error: null, loading: false, Article: action.payload };
     },
@@ -55,6 +70,16 @@ const ArticleSlice = createSlice({
       return { ...state, error: null, loading: true, Article: [] };
     },
     [getAsyncArticle.rejected]: (state, action) => {
+      return { ...state, error: action.error, loading: false, Article: [] };
+    },
+    // get one article actions
+    [getOneAsyncArticle.fulfilled]: (state, action) => {
+      return { ...state, error: null, loading: false, Article: action.payload };
+    },
+    [getOneAsyncArticle.pending]: (state, action) => {
+      return { ...state, error: null, loading: true, Article: [] };
+    },
+    [getOneAsyncArticle.rejected]: (state, action) => {
       return { ...state, error: action.error, loading: false, Article: [] };
     },
   },
