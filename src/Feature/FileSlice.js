@@ -5,7 +5,7 @@ export const getAsyncArticle = createAsyncThunk(
   "Article/getAsyncArticle",
   async (_, { rejectWithValue }) => {
     try {
-      const { data } = await axios.get("http://localhost:3002/Article");
+      const { data } = await axios.get("http://localhost:3001/Article");
       return data;
     } catch (error) {
       return rejectWithValue([], error.message);

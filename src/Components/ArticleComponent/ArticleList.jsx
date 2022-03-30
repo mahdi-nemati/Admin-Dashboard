@@ -1,13 +1,14 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getAsyncArticle } from "../../Feature/FileSlice";
+import Loading from "./Loading";
 export default function ArticleList() {
   const dispatch = useDispatch();
   const { Article, error, loading } = useSelector((store) => store.Article);
   useEffect(() => {
     dispatch(getAsyncArticle());
   }, []);
-  if (loading) return <p>loading...</p>;
+  if (loading) return <Loading />;
   if (error) return <p>something went wrong!</p>;
   return (
     <main className="w-full flex flex-col justify-center items-center">
