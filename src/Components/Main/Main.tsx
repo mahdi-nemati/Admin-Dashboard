@@ -12,7 +12,7 @@ function Main() {
     >
       <PreviewBar />
       <ChartComponent />
-      <ArticleList/>
+      <ArticleList />
     </main>
   );
 }

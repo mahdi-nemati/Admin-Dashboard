@@ -31,7 +31,13 @@ export const postAsyncArticle = createAsyncThunk(
   "Article/postAsyncArticle",
   async (payload, { rejectWithValue }) => {
     try {
-      //must be full
+      const { data } = axios.post("http://localhost:3001/Article", {
+        id: Math.floor(Math.random * 100),
+        title: payload.title,
+        author: payload.author,
+        body: payload.body,
+      });
+      return data;
     } catch (error) {
       return rejectWithValue([], error.message);
     }
@@ -80,6 +86,16 @@ const ArticleSlice = createSlice({
       return { ...state, error: null, loading: true, Article: [] };
     },
     [getOneAsyncArticle.rejected]: (state, action) => {
+      return { ...state, error: action.error, loading: false, Article: [] };
+    },
+    // post article
+    [postAsyncArticle.fulfilled]: (state, action) => {
+      return { ...state, error: null, loading: false, Article: action.payload };
+    },
+    [postAsyncArticle.pending]: (state, action) => {
+      return { ...state, error: null, loading: true, Article: [] };
+    },
+    [postAsyncArticle.rejected]: (state, action) => {
       return { ...state, error: action.error, loading: false, Article: [] };
     },
   },
