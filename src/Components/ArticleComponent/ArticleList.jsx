@@ -1,9 +1,10 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
-import { getAsyncArticle } from "../../Feature/FileSlice";
+import { deleteAsyncArticle, getAsyncArticle } from "../../Feature/FileSlice";
 import { Button } from "@mui/material";
 import Loading from "./Loading";
+import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 export default function ArticleList() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -15,6 +16,10 @@ export default function ArticleList() {
   useEffect(() => {
     dispatch(getAsyncArticle());
   }, []);
+  const deleteHandler = async (id) => {
+    await dispatch(deleteAsyncArticle(id));
+    dispatch(getAsyncArticle());
+  };
   if (loading) return <Loading />;
   if (error) return <p>something went wrong!</p>;
   return (
@@ -33,12 +38,22 @@ export default function ArticleList() {
         {Article ? (
           Article.map((a) => {
             return (
-              <Link to={`/article/${a.id}`} key={a.id}>
-                <div className="flex justify-between w-5/12 pl-5 pt-2 pb-2 mb-2 mt-1 hover:bg-gray-300 cursor-pointer">
+              <div className="flex items-center w-full justify-between">
+                <Link
+                  to={`/article/${a.id}`}
+                  key={a.id}
+                  className="flex justify-between w-5/12 pl-5 pt-2 pb-2 mb-2 mt-1 hover:bg-gray-200 cursor-pointer"
+                >
                   <p>{a.title}</p>
                   <p>{a.author}</p>
-                </div>
-              </Link>
+                </Link>
+                <span
+                  className="hover:bg-gray-200 cursor-pointer p-2 rounded-full"
+                  onClick={() => deleteHandler(a.id)}
+                >
+                  <DeleteOutlineIcon sx={{ fontSize: "30px" }} />
+                </span>
+              </div>
             );
           })
         ) : (

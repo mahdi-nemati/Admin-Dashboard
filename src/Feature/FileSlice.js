@@ -48,7 +48,8 @@ export const deleteAsyncArticle = createAsyncThunk(
   "contact/deleteAsyncArticle",
   async (payload, { rejectWithValue }) => {
     try {
-      // must be complete !
+      const { data } = axios.delete(`http://localhost:3001/article/${payload}`);
+      return data;
     } catch (error) {
       return rejectWithValue([], error.message);
     }

@@ -5,24 +5,6 @@
       "title": "test 1",
       "body": "this is test",
       "author": "mahdi nemati"
-    },
-    {
-      "id": 2,
-      "title": "test 2",
-      "body": "this is test for mahsan",
-      "author": "mahdi nemati"
-    },
-    {
-      "id": 3,
-      "title": "post data",
-      "author": "me",
-      "body": "this is just for test"
-    },
-    {
-      "id": 4,
-      "title": "test for post data 2",
-      "author": "me ",
-      "body": "lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem "
     }
   ]
 }
