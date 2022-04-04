@@ -13,10 +13,14 @@
   "Drafts": "پیش نویس",
   "Dashboard": "داشبورد",
   "Email": "ایمیل",
-  "Article List" : "مقاله ها",
-  "Add New Article":"اضافه کردن",
-  "Title":"عنوان",
-  "Author":"نویسنده",
-  "Successfully update !":"به روز رسانی شد",
-  "added to article list" : "به مقاله ها اضافه شد"
+  "Article List": "مقاله ها",
+  "Add New Article": "اضافه کردن",
+  "Title": "عنوان",
+  "Author": "نویسنده",
+  "Successfully update !": "به روز رسانی شد",
+  "added to article list": "به مقاله ها اضافه شد",
+  "Are you sure?": "آیا مطمئین هستید؟",
+  "You won't be able to revert this!": "در صورت حذف شدن دیگر به این محتوا دسترسی نخواهید داشت",
+  "Yes, delete it!":"بله ، حذف کن",
+  "cancel":"بیخیال"
 }
