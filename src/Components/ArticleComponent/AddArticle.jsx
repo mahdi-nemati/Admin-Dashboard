@@ -3,12 +3,13 @@ import Button from "@mui/material/Button";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import SimpleBackdrop from "./BackDrop";
-
+import { toast } from "react-toastify";
 //Formik & Yup imports
 import { useFormik } from "formik";
 import * as yup from "yup";
 import TextFieldCustom from "../../common/TextFieldCustom";
 import { postAsyncArticle } from "../../Feature/FileSlice";
+import { t } from "i18next";
 export default function AddArticle() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -28,6 +29,7 @@ export default function AddArticle() {
   const onSubmit = (value) => {
     dispatch(postAsyncArticle(value));
     navigate("/home");
+    toast.success(`"${value.title}" ${t("added to article list")}`);
   };
   // formik
   const formik = useFormik({

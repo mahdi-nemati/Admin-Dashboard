@@ -6,11 +6,12 @@ import SimpleBackdrop from "./BackDrop";
 import { useParams } from "react-router-dom";
 import { useEffect } from "react";
 import { getOneAsyncArticle, putAsyncArticle } from "../../Feature/FileSlice";
-
+import { t } from "i18next";
 //Formik & Yup imports
 import { useFormik } from "formik";
 import * as yup from "yup";
 import TextFieldCustom from "../../common/TextFieldCustom";
+import { toast } from "react-toastify";
 export default function EditArticle() {
   const { id } = useParams();
   const navigate = useNavigate();
@@ -34,6 +35,7 @@ export default function EditArticle() {
   const onSubmit = ({ title, author, body }) => {
     dispatch(putAsyncArticle({ id, title, author, body }));
     navigate("/home");
+    toast.success(t("Successfully update !"))
   };
   // formik
   const formik = useFormik({

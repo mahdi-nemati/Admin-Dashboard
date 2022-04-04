@@ -1,16 +1,10 @@
 {
   "Article": [
     {
-      "id": 1,
       "title": "test 1",
-      "body": "this is test",
-      "author": "mahdi nemati"
-    },
-    {
-      "title": "update",
-      "author": "me",
-      "body": "this was updated",
-      "id": 2
+      "author": "mahdi nemati",
+      "body": "this is testt",
+      "id": 1
     }
   ]
 }
