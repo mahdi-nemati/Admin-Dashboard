@@ -10,6 +10,7 @@ import * as yup from "yup";
 import TextFieldCustom from "../../common/TextFieldCustom";
 import { postAsyncArticle } from "../../Feature/FileSlice";
 import { t } from "i18next";
+import UploadButtons from "../../common/UploadButton";
 export default function AddArticle() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -57,9 +58,15 @@ export default function AddArticle() {
         onSubmit={formik.handleSubmit}
         sx={{ mt: 1, width: 600 }}
       >
+        <h1 className="flex justify-center mt-4 mb-6 text-2xl">
+          {t("Add New Article")}
+        </h1>
         <TextFieldCustom formik={formik} name="title" label="Title" />
         <TextFieldCustom formik={formik} name="author" label="Author" />
         <TextFieldCustom formik={formik} name="body" label="Content" />
+        <div>
+          <UploadButtons />
+        </div>
         <Button
           type="submit"
           onClick={formik.handleSubmit}
