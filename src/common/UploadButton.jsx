@@ -7,10 +7,10 @@ const Input = styled("input")({
   display: "none",
 });
 
-export default function UploadButtons() {
-  
+export default function UploadButtons({ uploadHandler }) {
   const changeHandle = (e) => {
     // must be complated
+    uploadHandler(e.target.files[0]);
   };
   return (
     <Stack direction="row" alignItems="center" spacing={2}>

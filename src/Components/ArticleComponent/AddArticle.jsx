@@ -11,7 +11,9 @@ import TextFieldCustom from "../../common/TextFieldCustom";
 import { postAsyncArticle } from "../../Feature/FileSlice";
 import { t } from "i18next";
 import UploadButtons from "../../common/UploadButton";
+import { useState } from "react";
 export default function AddArticle() {
+  const [link, setLink] = useState();
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { Article, error, loading } = useSelector((store) => store.Article);
@@ -27,10 +29,10 @@ export default function AddArticle() {
     author: yup.string().required("enter article's author").min(2),
   });
   // submit
-  const onSubmit = (value) => {
-    dispatch(postAsyncArticle(value));
+  const onSubmit = ({ title, author, body }) => {
+    dispatch(postAsyncArticle({ title, author, body, upload: link }));
     navigate("/home");
-    toast.success(`"${value.title}" ${t("added to article list")}`);
+    toast.success(`"${title}" ${t("added to article list")}`);
   };
   // formik
   const formik = useFormik({
@@ -40,7 +42,11 @@ export default function AddArticle() {
     enableReinitialize: true,
     onSubmit,
   });
-
+  // onChage for uploaded file
+  const uploadHandler = (e) => {
+    const url = URL.createObjectURL(e);
+    setLink(url);
+  };
   if (loading) return <SimpleBackdrop />;
   if (error) return <p>something went wrong!</p>;
   return (
@@ -65,7 +71,7 @@ export default function AddArticle() {
         <TextFieldCustom formik={formik} name="author" label="Author" />
         <TextFieldCustom formik={formik} name="body" label="Content" />
         <div>
-          <UploadButtons />
+          <UploadButtons uploadHandler={uploadHandler} />
         </div>
         <Button
           type="submit"

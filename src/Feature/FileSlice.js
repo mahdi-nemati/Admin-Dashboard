@@ -36,6 +36,7 @@ export const postAsyncArticle = createAsyncThunk(
         title: payload.title,
         author: payload.author,
         body: payload.body,
+        upload: payload.upload,
       });
       return data;
     } catch (error) {
@@ -74,7 +75,6 @@ export const putAsyncArticle = createAsyncThunk(
     }
   }
 );
-
 
 // initial
 const initialState = {
