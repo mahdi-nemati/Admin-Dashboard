@@ -18,9 +18,11 @@
   "Title": "Title",
   "Author": "Author",
   "Successfully update !": "Successfully update !",
-  "added to article list" : "added to article list",
-  "Are you sure?":"Are you sure?",
-  "You won't be able to revert this!":"You won't be able to revert this!",
-  "Yes, delete it!":"Yes, delete it!",
-  "cancel":"cancel"
+  "added to article list": "added to article list",
+  "Are you sure?": "Are you sure?",
+  "You won't be able to revert this!": "You won't be able to revert this!",
+  "Yes, delete it!": "Yes, delete it!",
+  "cancel": "cancel",
+  "Edit": "Edit",
+  "Delete":"Delete"
 }

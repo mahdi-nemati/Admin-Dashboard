@@ -2,12 +2,13 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { deleteAsyncArticle, getAsyncArticle } from "../../Feature/FileSlice";
-import { Button } from "@mui/material";
+import { Button, Tooltip } from "@mui/material";
 import Loading from "./Loading";
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 import EditIcon from "@mui/icons-material/Edit";
 import { t } from "i18next";
 import Swal from "sweetalert2";
+import Fade from "@mui/material/Fade";
 export default function ArticleList() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -74,17 +75,21 @@ export default function ArticleList() {
                   <p>{a.author}</p>
                 </Link>
                 <section className="flex-row-reverse w-3/5 flex justify-around">
-                  <span
-                    className="hover:bg-gray-200 cursor-pointer p-2 rounded-full"
-                    onClick={() => deleteHandler(a.id)}
-                  >
-                    <DeleteOutlineIcon sx={{ fontSize: "30px" }} />
-                  </span>
-                  <span className="hover:bg-gray-200 cursor-pointer p-2 rounded-full">
-                    <Link to={`/edit-article/${a.id}`}>
-                      <EditIcon sx={{ fontSize: "30px" }} />
-                    </Link>
-                  </span>
+                  <Tooltip title={t("Delete")} arrow TransitionComponent={Fade}>
+                    <span
+                      className="hover:bg-gray-200 cursor-pointer p-2 rounded-full"
+                      onClick={() => deleteHandler(a.id)}
+                    >
+                      <DeleteOutlineIcon sx={{ fontSize: "30px" }} />
+                    </span>
+                  </Tooltip>
+                  <Tooltip title={t("Edit")} arrow TransitionComponent={Fade}>
+                    <span className="hover:bg-gray-200 cursor-pointer p-2 rounded-full">
+                      <Link to={`/edit-article/${a.id}`}>
+                        <EditIcon sx={{ fontSize: "30px" }} />
+                      </Link>
+                    </span>
+                  </Tooltip>
                 </section>
               </div>
             );

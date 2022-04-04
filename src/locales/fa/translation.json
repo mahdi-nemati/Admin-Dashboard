@@ -22,5 +22,7 @@
   "Are you sure?": "آیا مطمئین هستید؟",
   "You won't be able to revert this!": "در صورت حذف شدن دیگر به این محتوا دسترسی نخواهید داشت",
   "Yes, delete it!":"بله ، حذف کن",
-  "cancel":"بیخیال"
+  "cancel":"بیخیال",
+  "Edit":"ویرایش",
+  "Delete":"حذف"
 }
