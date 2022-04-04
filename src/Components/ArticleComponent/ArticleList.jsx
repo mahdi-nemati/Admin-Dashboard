@@ -7,6 +7,7 @@ import Loading from "./Loading";
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 import EditIcon from "@mui/icons-material/Edit";
 import { t } from "i18next";
+import Swal from "sweetalert2";
 export default function ArticleList() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -23,8 +24,21 @@ export default function ArticleList() {
     dispatch(getAsyncArticle());
   }, []);
   const deleteHandler = (id) => {
-    dispatch(deleteAsyncArticle(id));
-    dispatch(getAsyncArticle());
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        dispatch(deleteAsyncArticle(id));
+        dispatch(getAsyncArticle());
+        Swal.fire("Deleted!", "Your file has been deleted.", "success");
+      }
+    });
   };
   if (loading) return <Loading />;
   if (error) return <p>something went wrong!</p>;
