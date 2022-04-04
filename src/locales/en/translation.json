@@ -12,5 +12,9 @@
   "Send email": "Send email",
   "Drafts": "Drafts",
   "Dashboard": "Dashboard",
-  "Email" : "Email"
+  "Email" : "Email",
+  "Article List":"Article List",
+  "Add New Article":"Add New Article",
+  "Title":"Title",
+  "Author":"Author"
 }

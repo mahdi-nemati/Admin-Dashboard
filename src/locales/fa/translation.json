@@ -12,5 +12,9 @@
   "Send email": "ارسال",
   "Drafts": "پیش نویس",
   "Dashboard": "داشبورد",
-  "Email": "ایمیل"
+  "Email": "ایمیل",
+  "Article List" : "مقاله ها",
+  "Add New Article":"اضافه کردن",
+  "Title":"عنوان",
+  "Author":"نویسنده"
 }
