@@ -5,10 +5,14 @@ import { deleteAsyncArticle, getAsyncArticle } from "../../Feature/FileSlice";
 import { Button } from "@mui/material";
 import Loading from "./Loading";
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
+import EditIcon from "@mui/icons-material/Edit";
 export default function ArticleList() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { Article, error, loading } = useSelector((store) => store.Article);
+  const editHandler = () => {
+    navigate("/edit-article");
+  };
   const clickHandle = (e) => {
     e.preventDefault();
     navigate("/add-article");
@@ -52,6 +56,11 @@ export default function ArticleList() {
                   onClick={() => deleteHandler(a.id)}
                 >
                   <DeleteOutlineIcon sx={{ fontSize: "30px" }} />
+                </span>
+                <span className="hover:bg-gray-200 cursor-pointer p-2 rounded-full">
+                  <Link to={`/edit-article/${a.id}`}>
+                    <EditIcon sx={{ fontSize: "30px" }} />
+                  </Link>
                 </span>
               </div>
             );

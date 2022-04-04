@@ -56,8 +56,25 @@ export const deleteAsyncArticle = createAsyncThunk(
   }
 );
 // put data
+export const putAsyncArticle = createAsyncThunk(
+  "contact/putAsyncArticle",
+  async (payload, { rejectWithValue }) => {
+    try {
+      const { data } = axios.put(
+        `http://localhost:3001/article/${payload.id}`,
+        {
+          title: payload.title,
+          author: payload.author,
+          body: payload.body,
+        }
+      );
+      return data;
+    } catch (error) {
+      return rejectWithValue([], error.message);
+    }
+  }
+);
 
-///////must be complate !
 
 // initial
 const initialState = {
@@ -97,6 +114,16 @@ const ArticleSlice = createSlice({
       return { ...state, error: null, loading: true, Article: [] };
     },
     [postAsyncArticle.rejected]: (state, action) => {
+      return { ...state, error: action.error, loading: false, Article: [] };
+    },
+    // put article
+    [putAsyncArticle.fulfilled]: (state, action) => {
+      return { ...state, error: null, loading: false, Article: action.payload };
+    },
+    [putAsyncArticle.pending]: (state, action) => {
+      return { ...state, error: null, loading: true, Article: [] };
+    },
+    [putAsyncArticle.rejected]: (state, action) => {
       return { ...state, error: action.error, loading: false, Article: [] };
     },
   },

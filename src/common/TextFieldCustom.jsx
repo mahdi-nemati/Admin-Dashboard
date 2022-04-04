@@ -1,6 +1,14 @@
 import { TextField } from "@mui/material";
+import { useState } from "react";
 
-const TextFieldCustom = ({ name, type = "text", formik, label , focus = false}) => {
+const TextFieldCustom = ({
+  name,
+  type = "text",
+  formik,
+  label,
+  focus = false,
+}) => {
+  
   return (
     <section className="w-full">
       <TextField
@@ -14,9 +22,12 @@ const TextFieldCustom = ({ name, type = "text", formik, label , focus = false}) 
         margin="normal"
       />
       <div className="">
-        {"" || formik.errors[name] && formik.touched[name] && (
-          <span className="text-red-500 text-sm ml-2">{formik.errors[name]}</span>
-        )}
+        {"" ||
+          (formik.errors[name] && formik.touched[name] && (
+            <span className="text-red-500 text-sm ml-2">
+              {formik.errors[name]}
+            </span>
+          ))}
       </div>
     </section>
   );
