@@ -10,9 +10,7 @@ export default function ArticleList() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { Article, error, loading } = useSelector((store) => store.Article);
-  const editHandler = () => {
-    navigate("/edit-article");
-  };
+  const arrArt = Array.from(Article);
   const clickHandle = (e) => {
     e.preventDefault();
     navigate("/add-article");
@@ -20,8 +18,8 @@ export default function ArticleList() {
   useEffect(() => {
     dispatch(getAsyncArticle());
   }, []);
-  const deleteHandler = async (id) => {
-    await dispatch(deleteAsyncArticle(id));
+  const deleteHandler = (id) => {
+    dispatch(deleteAsyncArticle(id));
     dispatch(getAsyncArticle());
   };
   if (loading) return <Loading />;
@@ -40,12 +38,14 @@ export default function ArticleList() {
           </div>
         </div>
         {Article ? (
-          Article.map((a) => {
+          arrArt.map((a) => {
             return (
-              <div className="flex items-center w-full justify-between">
+              <div
+                className="flex items-center w-full justify-between"
+                key={a.id}
+              >
                 <Link
                   to={`/article/${a.id}`}
-                  key={a.id}
                   className="flex justify-between w-5/12 pl-5 pt-2 pb-2 mb-2 mt-1 hover:bg-gray-200 cursor-pointer"
                 >
                   <p>{a.title}</p>

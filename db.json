@@ -13,10 +13,10 @@
       "id": 2
     },
     {
-      "id": 3,
-      "title": "FCBarcelona",
+      "title": "Real",
       "author": "Leo Messi",
-      "body": "mes que un club"
+      "body": "mes que un club",
+      "id": 3
     }
   ]
 }

@@ -17,9 +17,7 @@ export default function EditArticle() {
   const dispatch = useDispatch();
   const { Article, error, loading } = useSelector((store) => store.Article);
   useEffect(() => {
-    console.log(id);
     dispatch(getOneAsyncArticle(id));
-    console.log(Article);
   }, []);
   // set initail
   const initialValues = {
