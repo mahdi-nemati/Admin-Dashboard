@@ -33,7 +33,7 @@ export default function EditArticle() {
   });
   // submit
   const onSubmit = ({ title, author, body }) => {
-    dispatch(putAsyncArticle({ id, title, author, body }));
+    dispatch(putAsyncArticle({ id, title, author, body , upload : Article.upload}));
     navigate("/home");
     toast.success(t("Successfully update !"))
   };

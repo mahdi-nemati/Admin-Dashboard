@@ -11,13 +11,6 @@
       "title": "test for mahsan",
       "author": "me",
       "body": "lorem ipisum lorem ipisum lorem ipisum lorem ipisum lorem ipisum lorem ipisum lorem ipisum lorem ipisum lorem ipisum lorem ipisum"
-    },
-    {
-      "id": 3,
-      "title": "foolan",
-      "author": "foolani",
-      "body": "dasdasdas",
-      "upload": "blob:http://localhost:3000/b7e84c74-fd96-4ca0-be96-4a6d1fe1c923"
     }
   ]
 }

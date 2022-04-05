@@ -67,6 +67,7 @@ export const putAsyncArticle = createAsyncThunk(
           title: payload.title,
           author: payload.author,
           body: payload.body,
+          upload: payload.upload,
         }
       );
       return data;
