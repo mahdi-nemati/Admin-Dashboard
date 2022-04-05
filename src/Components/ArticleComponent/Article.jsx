@@ -17,6 +17,13 @@ const Article = () => {
       <section className="bg-white bg-opacity-40 w-11/12 rounded-2xl flex flex-col justify-center items-center p-5">
         <h1 className="text-5xl mb-4">{Article.title}</h1>
         <p className="text-xl mb-12">{Article.author}</p>
+        {Article.upload ? (
+          <a href={Article.upload} download>
+            download uploaded file
+          </a>
+        ) : (
+          ""
+        )}
         {Article.body ? (
           <p className="border border-gray-300 w-9/12 flex justify-start p-4">
             {Article.body}
