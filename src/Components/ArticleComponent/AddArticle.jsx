@@ -14,6 +14,7 @@ import UploadButtons from "../../common/UploadButton";
 import { useState } from "react";
 export default function AddArticle() {
   const [link, setLink] = useState();
+  const [file, setFile] = useState();
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { Article, error, loading } = useSelector((store) => store.Article);
@@ -44,6 +45,7 @@ export default function AddArticle() {
   });
   // onChage for uploaded file
   const uploadHandler = (e) => {
+    setFile(e);
     const url = URL.createObjectURL(e);
     setLink(url);
   };
@@ -70,8 +72,12 @@ export default function AddArticle() {
         <TextFieldCustom formik={formik} name="title" label="Title" />
         <TextFieldCustom formik={formik} name="author" label="Author" />
         <TextFieldCustom formik={formik} name="body" label="Content" />
-        <div>
-          <UploadButtons uploadHandler={uploadHandler} />
+        <div className="flex flex-col mt-3">
+          <div className="items-center flex">
+            <label className="mr-3">Upload File</label>
+            <UploadButtons uploadHandler={uploadHandler} />
+          </div>
+          <p className="text-sm text-gray-600 mt-2">{file && file.name}</p>
         </div>
         <Button
           type="submit"

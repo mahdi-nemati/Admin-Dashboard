@@ -1,6 +1,4 @@
 import { TextField } from "@mui/material";
-import { useState } from "react";
-
 const TextFieldCustom = ({
   name,
   type = "text",
@@ -8,18 +6,20 @@ const TextFieldCustom = ({
   label,
   focus = false,
 }) => {
-  
   return (
     <section className="w-full">
       <TextField
+        error={formik.errors[name] && formik.touched[name]}
         type={type}
         name={name}
         {...formik.getFieldProps(name)}
         label={label}
-        required
+        required={name!=="body"}
         fullWidth
         autoFocus={focus}
         margin="normal"
+        multiline={name === "body"}
+        rows={6}
       />
       <div className="">
         {"" ||

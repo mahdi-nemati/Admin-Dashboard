@@ -3,6 +3,8 @@ import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getOneAsyncArticle } from "../../Feature/FileSlice";
 import SimpleBackdrop from "./BackDrop";
+import { Button } from "@mui/material";
+import DownloadIcon from "@mui/icons-material/Download";
 const Article = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
@@ -16,11 +18,16 @@ const Article = () => {
     <main className="flex justify-center mt-8">
       <section className="bg-white bg-opacity-40 w-11/12 rounded-2xl flex flex-col justify-center items-center p-5">
         <h1 className="text-5xl mb-4">{Article.title}</h1>
-        <p className="text-xl mb-12">{Article.author}</p>
+        <p className="text-xl mb-4">{Article.author}</p>
         {Article.upload ? (
-          <a href={Article.upload} download>
+          <Button
+            variant="text"
+            startIcon={<DownloadIcon />}
+            download
+            href={Article.upload}
+          >
             download uploaded file
-          </a>
+          </Button>
         ) : (
           ""
         )}
