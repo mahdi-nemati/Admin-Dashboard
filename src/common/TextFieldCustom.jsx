@@ -1,10 +1,13 @@
-import { TextField } from "@mui/material";
+import { TextField , InputAdornment } from "@mui/material";
 const TextFieldCustom = ({
   name,
   type = "text",
   formik,
   label,
   focus = false,
+  iconStart,
+  iconEnd,
+  InputProps,
 }) => {
   return (
     <section className="w-full">
@@ -14,12 +17,21 @@ const TextFieldCustom = ({
         name={name}
         {...formik.getFieldProps(name)}
         label={label}
-        required={name!=="body"}
+        required={name !== "body"}
         fullWidth
         autoFocus={focus}
         margin="normal"
         multiline={name === "body"}
         rows={6}
+        InputProps={{
+          ...InputProps,
+          startAdornment: iconStart ? (
+            <InputAdornment position="start">{iconStart}</InputAdornment>
+          ) : null,
+          endAdornment: iconEnd ? (
+            <InputAdornment position="end">{iconEnd}</InputAdornment>
+          ) : null,
+        }}
       />
       <div className="">
         {"" ||

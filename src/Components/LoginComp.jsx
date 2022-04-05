@@ -12,6 +12,7 @@ import Typography from "@mui/material/Typography";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
+import { InputAdornment } from "@mui/material";
 //Formik & Yup imports
 import { useFormik } from "formik";
 import * as yup from "yup";
@@ -107,15 +108,20 @@ export default function SignInSide() {
               sx={{ mt: 1, width: 600 }}
             >
               <TextFieldCustom formik={formik} name="email" label="email" />
+
               <TextFieldCustom
                 formik={formik}
                 name="password"
                 label="password"
+                iconEnd={
+                  visible ? (
+                    <Visibility onClick={visibilityHandler} sx={{cursor:"pointer"}} />
+                  ) : (
+                    <VisibilityOff onClick={visibilityHandler} sx={{cursor:"pointer"}} />
+                  )
+                }
                 type={visible ? "password" : "text"}
               />
-              <span onClick={visibilityHandler} id="visibilityIcon">
-                {visible ? <Visibility /> : <VisibilityOff />}
-              </span>
               <FormControlLabel
                 control={<Checkbox value="remember" color="primary" />}
                 label="Remember me"

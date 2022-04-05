@@ -128,10 +128,21 @@ export default function SignInSide() {
                 name="password"
                 label="Password"
                 type={visible ? "password" : "text"}
+                iconEnd={
+                  visible ? (
+                    <Visibility
+                      onClick={visibilityHandler}
+                      sx={{ cursor: "pointer" }}
+                    />
+                  ) : (
+                    <VisibilityOff
+                      onClick={visibilityHandler}
+                      sx={{ cursor: "pointer" }}
+                    />
+                  )
+                }
               />
-              <span onClick={visibilityHandler} id="visibilityIconSignup">
-                {visible ? <Visibility /> : <VisibilityOff />}
-              </span>
+
               <TextFieldCustom
                 formik={formik}
                 name="passwordConfirm"
