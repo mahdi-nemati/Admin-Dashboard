@@ -1,4 +1,4 @@
-import * as React from "react";
+import { useState } from "react";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
@@ -12,6 +12,8 @@ import Grid from "@mui/material/Grid";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+import Visibility from "@mui/icons-material/Visibility";
+import VisibilityOff from "@mui/icons-material/VisibilityOff";
 //Formik & Yup imports
 import { useFormik } from "formik";
 import * as yup from "yup";
@@ -37,6 +39,7 @@ function Copyright(props) {
 const theme = createTheme();
 
 export default function SignInSide() {
+  const [visible, setVisible] = useState(true);
   // set initail
   const initialValues = {
     name: "",
@@ -72,6 +75,10 @@ export default function SignInSide() {
     validationSchema,
     enableReinitialize: true,
   });
+  // visibility
+  const visibilityHandler = () => {
+    setVisible(!visible);
+  };
   return (
     <ThemeProvider theme={theme}>
       <Grid container component="main" sx={{ height: "100vh" }}>
@@ -109,24 +116,27 @@ export default function SignInSide() {
               Sign Up
             </Typography>
             <Box component="form" noValidate sx={{ mt: 1, width: 600 }}>
+              <TextFieldCustom formik={formik} name="name" label="User Name" />
+              <TextFieldCustom formik={formik} name="email" label="Email" />
               <TextFieldCustom
                 formik={formik}
-                name="name"
-                label="user name"
+                name="phone"
+                label="Phone Number"
               />
-              <TextFieldCustom formik={formik} name="email" label="Email" />
-              <TextFieldCustom formik={formik} name="phone" label="Phone Number" />
               <TextFieldCustom
                 formik={formik}
                 name="password"
-                label="password"
-                type="password"
+                label="Password"
+                type={visible ? "password" : "text"}
               />
+              <span onClick={visibilityHandler} id="visibilityIconSignup">
+                {visible ? <Visibility /> : <VisibilityOff />}
+              </span>
               <TextFieldCustom
                 formik={formik}
                 name="passwordConfirm"
                 label="Confirm Password"
-                type="password"
+                type={visible ? "password" : "text"}
               />
               <FormControlLabel
                 control={<Checkbox value="agree" color="primary" />}

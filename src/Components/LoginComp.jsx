@@ -10,11 +10,13 @@ import Grid from "@mui/material/Grid";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-
+import Visibility from "@mui/icons-material/Visibility";
+import VisibilityOff from "@mui/icons-material/VisibilityOff";
 //Formik & Yup imports
 import { useFormik } from "formik";
 import * as yup from "yup";
 import TextFieldCustom from "../common/TextFieldCustom";
+import { useState } from "react";
 
 function Copyright(props) {
   return (
@@ -37,6 +39,7 @@ function Copyright(props) {
 const theme = createTheme();
 
 export default function SignInSide() {
+  const [visible, setVisible] = useState(true);
   // set initail
   const initialValues = {
     email: "",
@@ -57,7 +60,10 @@ export default function SignInSide() {
     validationSchema,
     enableReinitialize: true,
   });
-  // set submit function
+  // visibility
+  const visibilityHandler = () => {
+    setVisible(!visible);
+  };
 
   return (
     <ThemeProvider theme={theme}>
@@ -100,17 +106,16 @@ export default function SignInSide() {
               onSubmit={formik.handleSubmit}
               sx={{ mt: 1, width: 600 }}
             >
-              <TextFieldCustom
-                formik={formik}
-                name="email"
-                label="email"
-              />
+              <TextFieldCustom formik={formik} name="email" label="email" />
               <TextFieldCustom
                 formik={formik}
                 name="password"
                 label="password"
-                type="password"
+                type={visible ? "password" : "text"}
               />
+              <span onClick={visibilityHandler} id="visibilityIcon">
+                {visible ? <Visibility /> : <VisibilityOff />}
+              </span>
               <FormControlLabel
                 control={<Checkbox value="remember" color="primary" />}
                 label="Remember me"
