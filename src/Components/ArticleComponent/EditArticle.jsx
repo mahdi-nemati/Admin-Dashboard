@@ -7,12 +7,17 @@ import { useParams } from "react-router-dom";
 import { useEffect } from "react";
 import { getOneAsyncArticle, putAsyncArticle } from "../../Feature/FileSlice";
 import { t } from "i18next";
+import { useState } from "react";
 //Formik & Yup imports
 import { useFormik } from "formik";
 import * as yup from "yup";
 import TextFieldCustom from "../../common/TextFieldCustom";
 import { toast } from "react-toastify";
 export default function EditArticle() {
+  const [hover, setHover] = useState(false);
+  const variantChangeHandle = () => {
+    setHover(!hover);
+  };
   const { id } = useParams();
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -33,9 +38,11 @@ export default function EditArticle() {
   });
   // submit
   const onSubmit = ({ title, author, body }) => {
-    dispatch(putAsyncArticle({ id, title, author, body , upload : Article.upload}));
+    dispatch(
+      putAsyncArticle({ id, title, author, body, upload: Article.upload })
+    );
     navigate("/home");
-    toast.success(t("Successfully update !"))
+    toast.success(t("Successfully update !"));
   };
   // formik
   const formik = useFormik({
@@ -71,9 +78,11 @@ export default function EditArticle() {
           type="submit"
           onClick={formik.handleSubmit}
           fullWidth
-          variant="contained"
+          variant={hover ? "outlined" : "contained"}
           sx={{ mt: 3, mb: 2 }}
           disabled={!formik.isValid}
+          onMouseEnter={variantChangeHandle}
+          onMouseLeave={variantChangeHandle}
         >
           Update
         </Button>

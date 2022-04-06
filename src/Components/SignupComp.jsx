@@ -39,6 +39,10 @@ function Copyright(props) {
 const theme = createTheme();
 
 export default function SignInSide() {
+  const [hover, setHover] = useState(false);
+  const variantChangeHandle = () => {
+    setHover(!hover);
+  };
   const [visible, setVisible] = useState(true);
   // set initail
   const initialValues = {
@@ -150,16 +154,18 @@ export default function SignInSide() {
                 type={visible ? "password" : "text"}
               />
               <FormControlLabel
-                control={<Checkbox value="agree" color="primary" />}
+                control={<Checkbox value="agree" color="success" />}
                 label="agree with privacy policy"
               />
               <Button
                 type="submit"
                 fullWidth
-                variant="contained"
+                variant={hover ? "outlined" : "contained"}
                 sx={{ mt: 3, mb: 2 }}
                 href="/home"
                 disabled={!formik.isValid}
+                onMouseEnter={variantChangeHandle}
+                onMouseLeave={variantChangeHandle}
               >
                 Sign Up
               </Button>

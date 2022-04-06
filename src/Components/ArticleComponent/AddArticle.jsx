@@ -15,6 +15,10 @@ import { useState } from "react";
 export default function AddArticle() {
   const [link, setLink] = useState();
   const [file, setFile] = useState();
+  const [hover, setHover] = useState(false);
+  const variantChangeHandle = () => {
+    setHover(!hover);
+  };
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { Article, error, loading } = useSelector((store) => store.Article);
@@ -83,9 +87,11 @@ export default function AddArticle() {
           type="submit"
           onClick={formik.handleSubmit}
           fullWidth
-          variant="contained"
+          variant={hover ? "outlined" : "contained"}
           sx={{ mt: 3, mb: 2 }}
           disabled={!formik.isValid}
+          onMouseEnter={variantChangeHandle}
+          onMouseLeave={variantChangeHandle}
         >
           Add
         </Button>
