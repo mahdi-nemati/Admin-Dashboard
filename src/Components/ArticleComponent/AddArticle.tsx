@@ -11,17 +11,19 @@ import TextFieldCustom from "../../common/TextFieldCustom";
 import { postAsyncArticle } from "../../Feature/FileSlice";
 import { t } from "i18next";
 import UploadButtons from "../../common/UploadButton";
-import { useState } from "react";
+import React, { ChangeEvent, useState } from "react";
 export default function AddArticle() {
-  const [link, setLink] = useState();
-  const [file, setFile] = useState();
-  const [hover, setHover] = useState(false);
+  const [link, setLink] = useState<any>();
+  const [file, setFile] = useState<any>();
+  const [hover, setHover] = useState<boolean>(false);
   const variantChangeHandle = () => {
     setHover(!hover);
   };
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { Article, error, loading } = useSelector((store) => store.Article);
+  const { Article, error, loading } = useSelector(
+    (store: any) => store.Article
+  );
   // set initail
   const initialValues = {
     title: "",
@@ -33,8 +35,14 @@ export default function AddArticle() {
     title: yup.string().required("enter article's tilte").min(2),
     author: yup.string().required("enter article's author").min(2),
   });
+  // custom type
+  type onSubmitArgum = {
+    title: string;
+    author: string;
+    body: string;
+  };
   // submit
-  const onSubmit = ({ title, author, body }) => {
+  const onSubmit = ({ title, author, body }: onSubmitArgum) => {
     dispatch(postAsyncArticle({ title, author, body, upload: link }));
     navigate("/home");
     toast.success(`"${title}" ${t("added to article list")}`);
@@ -48,7 +56,7 @@ export default function AddArticle() {
     onSubmit,
   });
   // onChage for uploaded file
-  const uploadHandler = (e) => {
+  const uploadHandler = (e?: ChangeEvent<HTMLInputElement> | any) => {
     setFile(e);
     const url = URL.createObjectURL(e);
     setLink(url);
@@ -73,9 +81,36 @@ export default function AddArticle() {
         <h1 className="flex justify-center mt-4 mb-6 text-2xl">
           {t("Add New Article")}
         </h1>
-        <TextFieldCustom formik={formik} name="title" label="Title" />
-        <TextFieldCustom formik={formik} name="author" label="Author" />
-        <TextFieldCustom formik={formik} name="body" label="Content" />
+        <TextFieldCustom
+          formik={formik}
+          name="title"
+          label="Title"
+          type={""}
+          focus={false}
+          iconStart={undefined}
+          iconEnd={undefined}
+          InputProps={undefined}
+        />
+        <TextFieldCustom
+          formik={formik}
+          name="author"
+          label="Author"
+          type={""}
+          focus={false}
+          iconStart={undefined}
+          iconEnd={undefined}
+          InputProps={undefined}
+        />
+        <TextFieldCustom
+          formik={formik}
+          name="body"
+          label="Content"
+          type={""}
+          focus={false}
+          iconStart={undefined}
+          iconEnd={undefined}
+          InputProps={undefined}
+        />
         <div className="flex flex-col mt-3">
           <div className="items-center flex">
             <label className="mr-3">Upload File</label>
@@ -85,7 +120,6 @@ export default function AddArticle() {
         </div>
         <Button
           type="submit"
-          onClick={formik.handleSubmit}
           fullWidth
           variant={hover ? "outlined" : "contained"}
           sx={{ mt: 3, mb: 2 }}

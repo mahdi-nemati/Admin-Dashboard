@@ -1,23 +1,26 @@
-import { useEffect } from "react";
-import { DataGrid, GridRowsProp, GridColDef } from "@mui/x-data-grid";
+import { DataGrid } from "@mui/x-data-grid";
 import { useDispatch, useSelector } from "react-redux";
 import { deleteAsyncArticle, getAsyncArticle } from "../../Feature/FileSlice";
 import Loading from "../ArticleComponent/Loading";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 import EditIcon from "@mui/icons-material/Edit";
 import Swal from "sweetalert2";
 import { t } from "i18next";
 import { Box } from "@mui/system";
+import { ChangeEvent } from "react";
+import { GridColDef } from '@mui/x-data-grid';
 export default function Data() {
   const dispatch = useDispatch();
-  const { Article, error, loading } = useSelector((store) => store.Article);
+  const { Article, error, loading } = useSelector(
+    (store: any) => store.Article
+  );
   const navigate = useNavigate();
-  const editHandler = (e, id) => {
+  const editHandler = (e: React.MouseEvent<HTMLButtonElement>, id: any) => {
     e.stopPropagation();
     navigate(`/edit-article/${id}`);
   };
-  const deleteHandler = (e, id) => {
+  const deleteHandler = (e: React.MouseEvent<HTMLButtonElement>, id: any) => {
     e.stopPropagation();
     Swal.fire({
       title: t("Are you sure?"),
@@ -30,14 +33,14 @@ export default function Data() {
       cancelButtonText: t("cancel"),
     }).then((result) => {
       if (result.isConfirmed) {
-        dispatch(deleteAsyncArticle(id));
+        dispatch(deleteAsyncArticle({ id }));
         dispatch(getAsyncArticle());
         Swal.fire("Deleted!", "Your file has been deleted.", "success");
       }
     });
   };
   const rows = Article;
-  const columns = [
+  const columns : any = [
     {
       field: "title",
       width: 500,
@@ -55,9 +58,9 @@ export default function Data() {
       width: 195,
       headerClassName: "super-app-theme--header",
       headerAlign: "center",
-      renderCell: ({ id }) => (
+      renderCell: ({ id }: any) => (
         <span
-          onClick={(e) => editHandler(e, id)}
+          onClick={(e: React.MouseEvent<HTMLButtonElement>) => editHandler(e, id)}
           className="cursor-pointer w-full h-full flex justify-center items-center"
         >
           <EditIcon sx={{ fontSize: "30px" }} />
@@ -69,9 +72,9 @@ export default function Data() {
       width: 195,
       headerClassName: "super-app-theme--header",
       headerAlign: "center",
-      renderCell: ({ id }) => (
+      renderCell: ({ id }: any) => (
         <span
-          onClick={(e) => deleteHandler(e, id)}
+          onClick={(e: React.MouseEvent<HTMLButtonElement>) => deleteHandler(e, id)}
           className="cursor-pointer w-full h-full flex justify-center items-center"
         >
           <DeleteOutlineIcon sx={{ fontSize: "30px" }} />

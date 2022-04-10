@@ -1,8 +1,6 @@
-import { useState } from "react";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
-import TextField from "@mui/material/TextField";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
 import Link from "@mui/material/Link";
@@ -14,11 +12,14 @@ import Typography from "@mui/material/Typography";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
+import { InputAdornment } from "@mui/material";
 //Formik & Yup imports
 import { useFormik } from "formik";
 import * as yup from "yup";
 import TextFieldCustom from "../common/TextFieldCustom";
-function Copyright(props) {
+import { useState } from "react";
+
+function Copyright(props : any) {
   return (
     <Typography
       variant="body2"
@@ -46,31 +47,16 @@ export default function SignInSide() {
   const [visible, setVisible] = useState(true);
   // set initail
   const initialValues = {
-    name: "",
     email: "",
     password: "",
-    passwordConfirm: "",
-    phone: "",
   };
   // set validate
   const validationSchema = yup.object({
-    name: yup
-      .string()
-      .required("enter your name")
-      .min(6, "name must be 6 charackter at least"),
     email: yup.string().email("email is invalid").required("enter your email"),
     password: yup
       .string()
       .required("enter your password")
       .min(8, "password must be 8 charackter at least"),
-    phone: yup
-      .string()
-      .required("enter your phone")
-      .matches(/^[0-9]{11}$/, "phone number is invalid"),
-    passwordConfirm: yup
-      .string()
-      .required("confrim your password")
-      .oneOf([yup.ref("password"), null], "Passwords must match"),
   });
   // formik
   const formik = useFormik({
@@ -78,11 +64,12 @@ export default function SignInSide() {
     initialValues,
     validationSchema,
     enableReinitialize: true,
-  });
+  } as any);
   // visibility
   const visibilityHandler = () => {
     setVisible(!visible);
   };
+
   return (
     <ThemeProvider theme={theme}>
       <Grid container component="main" sx={{ height: "100vh" }}>
@@ -117,45 +104,32 @@ export default function SignInSide() {
               <LockOutlinedIcon />
             </Avatar>
             <Typography component="h1" variant="h5">
-              Sign Up
+              Sign in
             </Typography>
-            <Box component="form" noValidate sx={{ mt: 1, width: 600 }}>
-              <TextFieldCustom formik={formik} name="name" label="User Name" />
-              <TextFieldCustom formik={formik} name="email" label="Email" />
-              <TextFieldCustom
-                formik={formik}
-                name="phone"
-                label="Phone Number"
-              />
-              <TextFieldCustom
-                formik={formik}
-                name="password"
-                label="Password"
-                type={visible ? "password" : "text"}
-                iconEnd={
-                  visible ? (
-                    <Visibility
-                      onClick={visibilityHandler}
-                      sx={{ cursor: "pointer" }}
-                    />
-                  ) : (
-                    <VisibilityOff
-                      onClick={visibilityHandler}
-                      sx={{ cursor: "pointer" }}
-                    />
-                  )
-                }
-              />
+            <Box
+              component="form"
+              onSubmit={formik.handleSubmit}
+              sx={{ mt: 1, width: 600 }}
+            >
+              <TextFieldCustom formik={formik} name="email" label="email" type={""} focus={false} iconStart={undefined} iconEnd={undefined} InputProps={undefined} />
 
               <TextFieldCustom
                 formik={formik}
-                name="passwordConfirm"
-                label="Confirm Password"
-                type={visible ? "password" : "text"}
-              />
+                name="password"
+                label="password"
+                iconEnd={visible ? (
+                  <Visibility
+                    onClick={visibilityHandler}
+                    sx={{ cursor: "pointer" }} />
+                ) : (
+                  <VisibilityOff
+                    onClick={visibilityHandler}
+                    sx={{ cursor: "pointer" }} />
+                )}
+                type={visible ? "password" : "text"} focus={false} iconStart={undefined} InputProps={undefined}              />
               <FormControlLabel
-                control={<Checkbox value="agree" color="success" />}
-                label="agree with privacy policy"
+                control={<Checkbox value="remember" color="success" />}
+                label="Remember me"
               />
               <Button
                 type="submit"
@@ -167,12 +141,17 @@ export default function SignInSide() {
                 onMouseEnter={variantChangeHandle}
                 onMouseLeave={variantChangeHandle}
               >
-                Sign Up
+                Sign In
               </Button>
               <Grid container>
+                <Grid item xs>
+                  <Link href="#" variant="body2">
+                    Forgot password?
+                  </Link>
+                </Grid>
                 <Grid item>
-                  <Link href="/" variant="body2">
-                    {"already have an account? Sign in"}
+                  <Link href="/signup" variant="body2">
+                    {"Don't have an account? Sign Up"}
                   </Link>
                 </Grid>
               </Grid>

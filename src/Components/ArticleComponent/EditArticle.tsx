@@ -8,11 +8,11 @@ import { useEffect } from "react";
 import { getOneAsyncArticle, putAsyncArticle } from "../../Feature/FileSlice";
 import { t } from "i18next";
 import { useState } from "react";
+import { toast } from "react-toastify";
 //Formik & Yup imports
 import { useFormik } from "formik";
 import * as yup from "yup";
 import TextFieldCustom from "../../common/TextFieldCustom";
-import { toast } from "react-toastify";
 export default function EditArticle() {
   const [hover, setHover] = useState(false);
   const variantChangeHandle = () => {
@@ -21,9 +21,11 @@ export default function EditArticle() {
   const { id } = useParams();
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { Article, error, loading } = useSelector((store) => store.Article);
+  const { Article, error, loading } = useSelector(
+    (store: any) => store.Article
+  );
   useEffect(() => {
-    dispatch(getOneAsyncArticle(id));
+    dispatch(getOneAsyncArticle({id}));
   }, []);
   // set initail
   const initialValues = {
@@ -36,8 +38,13 @@ export default function EditArticle() {
     title: yup.string().required("enter article's tilte").min(2),
     author: yup.string().required("enter article's author").min(2),
   });
+  type onSubmitArgum = {
+    title: string;
+    author: string;
+    body: string;
+  };
   // submit
-  const onSubmit = ({ title, author, body }) => {
+  const onSubmit = ({ title, author, body }: onSubmitArgum) => {
     dispatch(
       putAsyncArticle({ id, title, author, body, upload: Article.upload })
     );
@@ -71,12 +78,38 @@ export default function EditArticle() {
         onSubmit={formik.handleSubmit}
         sx={{ mt: 1, width: 600 }}
       >
-        <TextFieldCustom formik={formik} name="title" label="Title" />
-        <TextFieldCustom formik={formik} name="author" label="Author" />
-        <TextFieldCustom formik={formik} name="body" label="Content" />
+        <TextFieldCustom
+          formik={formik}
+          name="title"
+          label="Title"
+          type={""}
+          focus={false}
+          iconStart={undefined}
+          iconEnd={undefined}
+          InputProps={undefined}
+        />
+        <TextFieldCustom
+          formik={formik}
+          name="author"
+          label="Author"
+          type={""}
+          focus={false}
+          iconStart={undefined}
+          iconEnd={undefined}
+          InputProps={undefined}
+        />
+        <TextFieldCustom
+          formik={formik}
+          name="body"
+          label="Content"
+          type={""}
+          focus={false}
+          iconStart={undefined}
+          iconEnd={undefined}
+          InputProps={undefined}
+        />
         <Button
           type="submit"
-          onClick={formik.handleSubmit}
           fullWidth
           variant={hover ? "outlined" : "contained"}
           sx={{ mt: 3, mb: 2 }}

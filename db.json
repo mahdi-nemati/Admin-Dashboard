@@ -11,13 +11,6 @@
       "author": "mahdi",
       "body": "lorem ipisum lorem ipisum lorem ipisum lorem ipisum lorem ipisum lorem ipisum lorem ipisum lorem ipisum lorem ipisum lorem ipisum",
       "id": 2
-    },
-    {
-      "title": "new one ",
-      "author": "me again",
-      "body": "this article has a uploaded file !",
-      "upload": "blob:http://localhost:3000/e93d11ff-ca9c-4a63-a5d8-de5badeffac7",
-      "id": 3
     }
   ]
 }

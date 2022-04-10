@@ -8,9 +8,9 @@ import DownloadIcon from "@mui/icons-material/Download";
 const Article = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
-  const { Article, error, loading } = useSelector((store) => store.Article);
+  const { Article, error, loading } = useSelector((store : any) => store.Article);
   useEffect(() => {
-    Article && id && dispatch(getOneAsyncArticle(id));
+    Article && id && dispatch(getOneAsyncArticle({id}));
   }, []);
   if (loading) return <SimpleBackdrop />;
   if (error) return <p>something went wrong!</p>;

@@ -1,4 +1,4 @@
-import { TextField , InputAdornment } from "@mui/material";
+import { TextField, InputAdornment } from "@mui/material";
 const TextFieldCustom = ({
   name,
   type = "text",
@@ -8,6 +8,15 @@ const TextFieldCustom = ({
   iconStart,
   iconEnd,
   InputProps,
+}: {
+  name: string;
+  type: string;
+  formik: any;
+  label: string;
+  focus: boolean;
+  iconStart: any;
+  iconEnd: any;
+  InputProps: any;
 }) => {
   return (
     <section className="w-full">

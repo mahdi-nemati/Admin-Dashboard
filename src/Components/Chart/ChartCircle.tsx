@@ -10,6 +10,15 @@ const data = [
 const COLORS = ["#4f46e5", "#fb923c", "#ec4899"];
 
 const RADIAN = Math.PI / 180;
+type chartDeatial = {
+  cx: any;
+  cy: any;
+  midAngle: any;
+  innerRadius: any;
+  outerRadius: any;
+  percent: any;
+  index: any;
+};
 const renderCustomizedLabel = ({
   cx,
   cy,
@@ -18,7 +27,7 @@ const renderCustomizedLabel = ({
   outerRadius,
   percent,
   index,
-}) => {
+}: chartDeatial) => {
   const radius = innerRadius + (outerRadius - innerRadius) * 0.5;
   const x = cx + radius * Math.cos(-midAngle * RADIAN);
   const y = cy + radius * Math.sin(-midAngle * RADIAN);
